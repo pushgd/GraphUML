@@ -2,7 +2,7 @@ package com.mygdx.UML;
 
 public class Debug
 {
-	public static void log(String s)
+	public static void log(Object s)
 	{
 		System.out.println(s);
 	}

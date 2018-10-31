@@ -2,12 +2,15 @@ package com.mygdx.UML.Application;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.UML.Debug;
+
+import UI.Button;
 
 public class Canvas
 {
+	Button b = new Button(250,250);
 	public void update()
 	{
-
 	}
 
 	public void paint(SpriteBatch g)

@@ -8,6 +8,6 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		
-		new LwjglApplication(new UML(), "UML",1280,720);
+		new LwjglApplication(new UML(), "UML",800,600);
 	}
 }

@@ -15,8 +15,8 @@ public class UML extends ApplicationAdapter
 {
 	
 	public static final float MS_FOR_EACH_FRAME = 1000f / 30;
-	public static final int SCREEN_WIDTH = 1280;
-	public static final int SCREEN_HEIGHT = 720;
+	public static final int SCREEN_WIDTH = 800;
+	public static final int SCREEN_HEIGHT = 600;
 	
 	
 	SpriteBatch batch;
@@ -64,8 +64,8 @@ public class UML extends ApplicationAdapter
 		canvasViewport.apply();
 		batch.begin();
 
-		batch.draw(img, x, 20);
-
+//		batch.draw(img, x, 20);
+		Main.getInstance().paint(false,batch);
 //		x += 0.5;
 //		System.out.println(x + " " + mainScreenViewport.getScreenWidth());
 		batch.end();
@@ -75,7 +75,8 @@ public class UML extends ApplicationAdapter
 		batch.setProjectionMatrix(menuCamera.combined);
 
 		batch.begin();
-		batch.draw(img, 0, 0);
+		Main.getInstance().paint(true,batch);
+//		batch.draw(img, 0, 0);
 		batch.end();
 //		
 
