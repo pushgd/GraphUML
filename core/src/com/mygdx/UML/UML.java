@@ -56,24 +56,21 @@ public class UML extends ApplicationAdapter
 	@Override
 	public void render()
 	{
-//		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.45f,0.45f, 0.45f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//		viewport1.setScreenX(640);
-		batch.setProjectionMatrix(canvasCam.combined);
+		
+		// paint canvas
 		canvasViewport.apply();
+		batch.setProjectionMatrix(canvasCam.combined);
 		batch.begin();
-
-//		batch.draw(img, x, 20);
 		Main.getInstance().paint(false,batch);
-//		x += 0.5;
-//		System.out.println(x + " " + mainScreenViewport.getScreenWidth());
 		batch.end();
-
+		
+		
+		//paint menu
 		menuViewport.apply();
-
 		batch.setProjectionMatrix(menuCamera.combined);
-
 		batch.begin();
 		Main.getInstance().paint(true,batch);
 //		batch.draw(img, 0, 0);

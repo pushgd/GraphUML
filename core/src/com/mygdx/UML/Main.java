@@ -27,7 +27,7 @@ public class Main implements InputProcessor
 		instance.t = new Vector2();
 		instance.canvas = new Canvas();
 		instance.menu = new Menu();
-	
+
 	}
 
 	public static Main getInstance()
@@ -42,7 +42,7 @@ public class Main implements InputProcessor
 
 	public void update()
 	{
-
+		canvas.update();
 	}
 
 	public void paint(boolean isMenu, SpriteBatch g)
@@ -81,8 +81,10 @@ public class Main implements InputProcessor
 	public boolean touchDown(int screenX, int screenY, int pointer, int button)
 	{
 		t.x = screenX;
-		t.y = UML.SCREEN_HEIGHT - screenY;
+		t.y = screenY;
 		canvas.onTouchDown(canvasViewport.unproject(t), button);
+		t.x = screenX;
+		t.y = screenY;
 		menu.onTouchDown(menuViewport.unproject(t), button);
 
 		return false;
@@ -92,8 +94,10 @@ public class Main implements InputProcessor
 	public boolean touchUp(int screenX, int screenY, int pointer, int button)
 	{
 		t.x = screenX;
-		t.y = UML.SCREEN_HEIGHT - screenY;
+		t.y = screenY;
 		canvas.onTouchUp(canvasViewport.unproject(t), button);
+		t.x = screenX;
+		t.y = screenY;
 		menu.onTouchUp(menuViewport.unproject(t), button);
 
 		return false;
@@ -102,9 +106,12 @@ public class Main implements InputProcessor
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer)
 	{
+//		Debug.log("ScreenX "+screenX+" ScreenY "+screenY);
 		t.x = screenX;
-		t.y = UML.SCREEN_HEIGHT - screenY;
+		t.y = screenY;
 		canvas.onTouchDragged(canvasViewport.unproject(t));
+		t.x = screenX;
+		t.y = screenY;
 		menu.onTouchDragged(menuViewport.unproject(t));
 		return false;
 	}
@@ -113,8 +120,10 @@ public class Main implements InputProcessor
 	public boolean mouseMoved(int screenX, int screenY)
 	{
 		t.x = screenX;
-		t.y = UML.SCREEN_HEIGHT - screenY;
-		canvas.onMouseMoved(canvasViewport.unproject(t));
+		t.y = screenY;
+		canvas.onTouchDragged(canvasViewport.unproject(t));
+		t.x = screenX;
+		t.y = screenY;
 		menu.onMouseMoved(menuViewport.unproject(t));
 		return false;
 	}
@@ -124,6 +133,14 @@ public class Main implements InputProcessor
 	{
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void onButtonPressd(int id)
+	{
+
+		menu.onButtonPressed(id);
+		canvas.onButtonPressed(id);
+
 	}
 
 }

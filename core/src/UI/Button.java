@@ -1,43 +1,16 @@
 package UI;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Button
+public class Button extends UIComponent
 {
-	private static BitmapFont font;
-	private static GlyphLayout fontlayout;
-	private static Texture bg;
-	private int ID;
-	private String text;
-	private Vector2 position;
-	private ButtonEventListener listener;
-	private float left, right, top, bottom;
-
-	public static void init()
-	{
-		font = new BitmapFont();
-		fontlayout = new GlyphLayout();
-		bg = new Texture("buttonBG.png");
-	}
-
-	public String getText()
-	{
-		return text;
-	}
-
-	public void setText(String text)
-	{
-		this.text = text;
-	}
 
 	public Button()
 	{
 		text = "Default";
 		position = new Vector2();
+		color = normalColor;
 
 	}
 
@@ -45,24 +18,6 @@ public class Button
 	{
 		this();
 		setPosition(x, y);
-
-	}
-
-	public Vector2 getPosition()
-	{
-		return position;
-	}
-
-	public void setPosition(float x, float y)
-	{
-		position.x = x;
-		position.y = y;
-
-		left = position.x - bg.getWidth() / 2;
-		right = position.x + bg.getWidth() / 2;
-
-		bottom = position.y - bg.getHeight() / 2;
-		top = position.y + bg.getHeight() / 2;
 	}
 
 	public Button(String text)
@@ -70,16 +25,26 @@ public class Button
 
 	}
 
-	public void paint(SpriteBatch g)
+	@Override
+	public void setPosition(float x, float y)
 	{
-		g.draw(bg, position.x - bg.getWidth() / 2, position.y - bg.getHeight() / 2);
-		fontlayout.setText(font, text);
-		font.draw(g, fontlayout, position.x - fontlayout.width / 2, position.y + fontlayout.height / 2);
+		position.x = x;
+		position.y = y;
+
+		left = position.x - Draw.buttonBG.getWidth() / 2;
+		right = position.x + Draw.buttonBG.getWidth() / 2;
+
+		bottom = position.y - Draw.buttonBG.getHeight() / 2;
+		top = position.y + Draw.buttonBG.getHeight() / 2;
 	}
 
-	public int getID()
+	public void paint(SpriteBatch g)
 	{
-		return ID;
+		g.setColor(color);
+		g.draw(Draw.buttonBG, position.x - Draw.buttonBG.getWidth() / 2, position.y - Draw.buttonBG.getHeight() / 2);
+		Draw.fontlayout.setText(Draw.font, text);
+		Draw.font.draw(g, Draw.fontlayout, position.x - Draw.fontlayout.width / 2,
+				position.y + Draw.fontlayout.height / 2);
 	}
 
 	public void setID(int iD)
@@ -87,27 +52,41 @@ public class Button
 		ID = iD;
 	}
 
-	public ButtonEventListener getListener()
+	public void setHover()
 	{
-		return listener;
+		color = hoverColor;
+		hovered = true;
 	}
 
-	public void setListener(ButtonEventListener listener)
+	public void resetHover()
 	{
-		this.listener = listener;
+		color = normalColor;
+		hovered = false;
 	}
 
-	public boolean isPointInside(Vector2 v)
+	public boolean wasHovered()
 	{
-		return v.x >= left && v.x <= right && v.y >= bottom && v.y <= top;
-
+		return hovered;
 	}
 
 	@Override
-	public String toString()
+	public void onUIHover()
 	{
-		// TODO Auto-generated method stub
-		return text + " " + ID;
+		setHover();
+		listener.onHover(this);
+	}
+
+	@Override
+	public void onUIHoverExit()
+	{
+		resetHover();
+		listener.onHoverExit(this);
+	}
+
+	@Override
+	public void onUIButtonPress()
+	{
+		listener.onClickUp(this);
 	}
 
 }
