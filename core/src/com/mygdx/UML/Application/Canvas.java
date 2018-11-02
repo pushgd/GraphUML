@@ -18,6 +18,8 @@ import UI.State;
 import UI.Transition;
 import UI.UIComponent;
 import UI.UMLComponent;
+import command.AddStateCommand;
+import command.Command;
 
 public class Canvas
 {
@@ -30,7 +32,7 @@ public class Canvas
 
 	private ArrayList<UMLComponent> umlComponents = new ArrayList<UMLComponent>();
 
-	private UIComponent selected;
+	private UMLComponent selected;
 
 	private UMLComponent start, end;
 
@@ -46,26 +48,23 @@ public class Canvas
 
 	public void update()
 	{
-		Debug.log("State = "+state);
-		switch (state)
+
+		for(int i =0;i<umlComponents.size();i++)
+		{
+			UMLComponent u = umlComponents.get(i);
+			if(u.toBeDeleted())
 			{
-			case STATE_ADD_TRANSITION:
-				
-				if (start != null && end != null)
-				{
-					umlComponents.add(new Transition(start, end));
-					state = STATE_NORMAL;
-				}
-				break;
-
-			default:
-				break;
+				umlComponents.remove(u);
+				i--;
 			}
-
+		}
+		
+		
 	}
 
 	public void paint(SpriteBatch g)
 	{
+		
 
 		Draw.drawRect(g, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 180, 180, 180, 255);
 
@@ -88,15 +87,21 @@ public class Canvas
 			{
 				noThingClicked = false;
 				uml.onButtonDown();
+				if(selected!= null)
+				{
+					selected.onDeselect();
+				}
 				selected = uml;
+				selected.onSelect();
+				break;
 			}
 		}
 	}
 
 	public void onTouchUp(Vector2 v, int button)
 	{
-		noThingClicked =true;
-		selected = null;
+		noThingClicked = true;
+
 		UMLComponent uml = null;
 		for (int i = 0; i < umlComponents.size(); i++)
 		{
@@ -104,10 +109,15 @@ public class Canvas
 			if (uml.isPointInside(v))
 			{
 				uml.onButtonPress();
-				noThingClicked =false;;
-				Debug.log("Pressed "+uml);
+				noThingClicked = false;
+				Debug.log("Pressed " + uml);
 				break;
 			}
+		}
+		if (button == 1)
+		{
+			selected.onDeselect();
+			selected = null;
 		}
 
 		switch (state)
@@ -123,12 +133,13 @@ public class Canvas
 				{
 					start = uml;
 					helpText = "Select Second Node";
-					
+
 				} else
 				{
 					end = uml;
-					
-					umlComponents.add(0,new Transition(start, end));
+
+					umlComponents.add(0, new Transition(start, end));
+					helpText = "";
 					state = STATE_NORMAL;
 				}
 				break;
@@ -149,6 +160,7 @@ public class Canvas
 			if (uml.isPointInside(v))
 			{
 				uml.onDrag();
+				break;
 			}
 		}
 	}
@@ -174,9 +186,13 @@ public class Canvas
 		switch (id)
 			{
 			case Constants.BUTTON_ADD_STATE:
-				State s = new State("New", 200, 200);
-				umlComponents.add(s);
-
+//				State s = new State("New", 200, 200);
+//				umlComponents.add(s);
+				AddStateCommand c = new AddStateCommand();
+				c.setParameter(AddStateCommand.STATE_POSITION, new Vector2(200, 200));
+				c.setParameter(AddStateCommand.STATE_NAME, "New");
+				c.setParameter(AddStateCommand.CANVAS, this);
+				c.execute();
 				break;
 
 			case Constants.BUTTON_ADD_TRANSITION:
@@ -186,9 +202,23 @@ public class Canvas
 				end = null;
 				break;
 
+			case Constants.BUTTON_DELETE:
+				selected.delete();
+				selected= null;
+				break;
+
 			default:
 				break;
 			}
 	}
 
+	public void addState(State s)
+	{
+		umlComponents.add(s);
+	}
+
+	public void addTransition(Transition t)
+	{
+		umlComponents.add(t);
+	}
 }

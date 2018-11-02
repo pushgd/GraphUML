@@ -13,18 +13,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class UML extends ApplicationAdapter
 {
-	
+
 	public static final float MS_FOR_EACH_FRAME = 1000f / 30;
 	public static final int SCREEN_WIDTH = 800;
 	public static final int SCREEN_HEIGHT = 600;
-	
-	
+
 	SpriteBatch batch;
 	Texture img;
 	OrthographicCamera canvasCam;
 	OrthographicCamera menuCamera;
 
-	 
 	ScreenViewport canvasViewport, menuViewport;
 
 	@Override
@@ -45,8 +43,8 @@ public class UML extends ApplicationAdapter
 
 		menuViewport.update((int) menuCamera.viewportWidth, (int) menuCamera.viewportHeight, true);
 		menuViewport.setScreenX((int) canvasCam.viewportWidth);
-		
-		Main.init(canvasViewport,menuViewport);
+
+		Main.init(canvasViewport, menuViewport);
 		Gdx.input.setInputProcessor(Main.getInstance());
 
 	}
@@ -56,23 +54,23 @@ public class UML extends ApplicationAdapter
 	@Override
 	public void render()
 	{
-		Gdx.gl.glClearColor(0.45f,0.45f, 0.45f, 1);
+		Gdx.gl.glClearColor(0.45f, 0.45f, 0.45f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		
+		Main.getInstance().update();
+
 		// paint canvas
 		canvasViewport.apply();
 		batch.setProjectionMatrix(canvasCam.combined);
 		batch.begin();
-		Main.getInstance().paint(false,batch);
+		Main.getInstance().paint(false, batch);
 		batch.end();
-		
-		
-		//paint menu
+
+		// paint menu
 		menuViewport.apply();
 		batch.setProjectionMatrix(menuCamera.combined);
 		batch.begin();
-		Main.getInstance().paint(true,batch);
+		Main.getInstance().paint(true, batch);
 //		batch.draw(img, 0, 0);
 		batch.end();
 //		

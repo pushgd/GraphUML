@@ -43,6 +43,7 @@ public class Main implements InputProcessor
 	public void update()
 	{
 		canvas.update();
+		menu.update();
 	}
 
 	public void paint(boolean isMenu, SpriteBatch g)
@@ -121,7 +122,7 @@ public class Main implements InputProcessor
 	{
 		t.x = screenX;
 		t.y = screenY;
-		canvas.onTouchDragged(canvasViewport.unproject(t));
+		canvas.onMouseMoved(canvasViewport.unproject(t));
 		t.x = screenX;
 		t.y = screenY;
 		menu.onMouseMoved(menuViewport.unproject(t));

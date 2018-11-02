@@ -7,8 +7,12 @@ import com.mygdx.UML.Debug;
 
 public class UIComponent
 {
+	private boolean delete;
+
 	protected int ID;
 	protected String text;
+	protected String description;
+	
 	protected Vector2 position;
 	protected InputEventListener listener;
 	protected float left, right, top, bottom;
@@ -189,5 +193,41 @@ public class UIComponent
 
 			}
 		};
+
+	public void delete()
+	{
+		onDelete();
+		delete = true;
+	}
+
+	public void onSelect()
+	{
+
+	}
+
+	public void onDeselect()
+	{
+
+	}
+
+	public void onDelete()
+	{
+
+	}
+
+	public boolean toBeDeleted()
+	{
+		return delete;
+	}
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
 
 }

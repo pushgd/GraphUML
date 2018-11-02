@@ -32,6 +32,12 @@ public class Menu
 		addTransitionButton.setListener(ButtonEventsManager.getInstance());
 		buttons.add(addTransitionButton);
 
+		Button delete = new Button(VIEWPORT_WIDTH / 2, VIEWPORT_HEIGHT / 4);
+		delete.setText("Delete");
+		delete.setID(Constants.BUTTON_DELETE);
+		delete.setListener(ButtonEventsManager.getInstance());
+		buttons.add(delete);
+
 		
 		
 		
@@ -44,6 +50,7 @@ public class Menu
 
 	public void paint(SpriteBatch g)
 	{
+//		Debug.log(" "+buttons.size());
 		Draw.drawRect(g, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,200,200,200,255);
 		for (int i = 0; i < buttons.size(); i++)
 		{

@@ -30,6 +30,10 @@ public class ButtonEventsManager implements InputEventListener
 			case Constants.BUTTON_ADD_TRANSITION:
 				Main.getInstance().onButtonPressd(source.getID());
 				break;
+				
+			case Constants.BUTTON_DELETE:
+				Main.getInstance().onButtonPressd(source.getID());
+				break;
 
 			default:
 				break;

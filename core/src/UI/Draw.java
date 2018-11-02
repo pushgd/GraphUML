@@ -16,6 +16,7 @@ public class Draw
 	public static GlyphLayout fontlayout = new GlyphLayout();
 	public static Sprite buttonBG = new Sprite(new Texture("buttonBG.png"));
 	public static Sprite stateBG = new Sprite(new Texture("stateBG.png"));
+	public static Sprite arrow = new Sprite(new Texture("arrow.png"));
 
 	public static void drawRect(SpriteBatch g, float x, float y, float width, float height)
 	{
@@ -69,6 +70,7 @@ public class Draw
 		
 		pixel.setColor(r/255, g/255, b/255,1);
 		drawLine(spritebatch, x1, y1, x2, y2, height);
+	
 		
 	}
 

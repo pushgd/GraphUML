@@ -1,16 +1,22 @@
 package UI;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.UML.Debug;
 
 public abstract class UMLComponent extends UIComponent
 {
 
 	private static int baseID = 0;
 
+	ArrayList<Transition>startingTransitions = new ArrayList<Transition>();
+	ArrayList<Transition>endingTransitions = new ArrayList<Transition>();
+	
 	Color hoverColor = new Color(50 / 255f, 50 / 255f, 50 / 255f, 1);
 	Color normalColor = new Color(1, 1, 1, 1);
 	Color color;
@@ -22,6 +28,7 @@ public abstract class UMLComponent extends UIComponent
 		position = new Vector2();
 		text = "default";
 		color = normalColor;
+	
 	}
 
 	public void setHover()
@@ -51,14 +58,14 @@ public abstract class UMLComponent extends UIComponent
 	@Override
 	public void onUIHover()
 	{
-		setHover();
+//		setHover();
 		listener.onHover(this);
 	}
 
 	@Override
 	public void onUIHoverExit()
 	{
-		resetHover();
+//		resetHover();
 		listener.onHoverExit(this);
 	}
 
@@ -74,5 +81,32 @@ public abstract class UMLComponent extends UIComponent
 		// TODO Auto-generated method stub
 		listener.onClickDown(this);
 	}
+	
+	public void addStartTransition(Transition t)
+	{
+		startingTransitions.add(t);
+	}
+	
+	public void addEndTransaction(Transition t)
+	{
+		endingTransitions.add(t);
+	}
+	@Override
+	public  void onSelect()
+	{
+		color = hoverColor;
+	}
+	
+	@Override
+	public void onDeselect()
+	{
+		color = normalColor;
+	}
+	@Override
+	public void onDelete()
+	{
+		Debug.log("On Delete "+getClass().getSimpleName());
+	}
+	
 
 }
