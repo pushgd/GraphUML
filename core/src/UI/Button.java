@@ -8,7 +8,7 @@ public class Button extends UIComponent
 
 	public Button()
 	{
-		text = "Default";
+		name = "Default";
 		position = new Vector2();
 		color = normalColor;
 
@@ -42,7 +42,7 @@ public class Button extends UIComponent
 	{
 		g.setColor(color);
 		g.draw(Draw.buttonBG, position.x - Draw.buttonBG.getWidth() / 2, position.y - Draw.buttonBG.getHeight() / 2);
-		Draw.fontlayout.setText(Draw.font, text);
+		Draw.fontlayout.setText(Draw.font, name);
 		Draw.font.draw(g, Draw.fontlayout, position.x - Draw.fontlayout.width / 2,
 				position.y + Draw.fontlayout.height / 2);
 	}

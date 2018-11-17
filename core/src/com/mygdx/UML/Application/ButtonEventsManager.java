@@ -12,7 +12,7 @@ public class ButtonEventsManager implements InputEventListener
 
 	public static ButtonEventsManager getInstance()
 	{
-		if(instance == null)
+		if (instance == null)
 			instance = new ButtonEventsManager();
 		return instance;
 	}
@@ -21,23 +21,37 @@ public class ButtonEventsManager implements InputEventListener
 	public void onClickUp(UIComponent source)
 	{
 
-		switch (source.getID())
-			{
-			case Constants.BUTTON_ADD_STATE:
-				Main.getInstance().onButtonPressd(source.getID());
-				break;
-				
-			case Constants.BUTTON_ADD_TRANSITION:
-				Main.getInstance().onButtonPressd(source.getID());
-				break;
-				
-			case Constants.BUTTON_DELETE:
-				Main.getInstance().onButtonPressd(source.getID());
-				break;
-
-			default:
-				break;
-			}
+		Main.getInstance().onButtonPressd(source.getID());
+		
+//		switch (source.getID())
+//			{
+//			case Constants.BUTTON_ADD_STATE:
+//				Main.getInstance().onButtonPressd(source.getID());
+//				break;
+//
+//			case Constants.BUTTON_ADD_TRANSITION:
+//				Main.getInstance().onButtonPressd(source.getID());
+//				break;
+//
+//			case Constants.BUTTON_DELETE:
+//				Main.getInstance().onButtonPressd(source.getID());
+//				break;
+//
+//			case Constants.BUTTON_TRAVEL:
+//				Main.getInstance().onButtonPressd(source.getID());
+//				break;
+//
+//			case Constants.BUTTON_SAVE:
+//				Main.getInstance().onButtonPressd(source.getID());
+//				break;
+//
+//			case Constants.BUTTON_LOAD:
+//				Main.getInstance().onButtonPressd(source.getID());
+//				break;
+//
+//			default:
+//				break;
+//			}
 
 	}
 
@@ -64,14 +78,14 @@ public class ButtonEventsManager implements InputEventListener
 	public void onClickDown(UIComponent source)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDrag(UIComponent source)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

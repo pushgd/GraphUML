@@ -3,10 +3,33 @@ package UI;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.UML.Debug;
+import com.mygdx.UML.Main;
+import com.mygdx.UML.Application.Canvas;
+import com.mygdx.UML.Application.Constants;
 
 public class Transition extends UMLComponent
 {
 	private UMLComponent start, end;
+	private int startID,endID;
+	public UMLComponent getStart()
+	{
+		return start;
+	}
+
+	public void setStart(UMLComponent start)
+	{
+		this.start = start;
+	}
+
+	public UMLComponent getEnd()
+	{
+		return end;
+	}
+
+	public void setEnd(UMLComponent end)
+	{
+		this.end = end;
+	}
 
 	public Transition(UMLComponent start, UMLComponent end)
 	{
@@ -18,6 +41,14 @@ public class Transition extends UMLComponent
 		
 	}
 
+	public Transition(int ID,int start , int end)
+	{
+		super(ID);
+		startID = start;
+		endID = end;
+		
+	}
+	
 	@Override
 	public void paint(SpriteBatch g)
 	{
@@ -34,5 +65,47 @@ public class Transition extends UMLComponent
 	{
 		// TODO Auto-generated method stub
 	return false;
+	}
+	
+	@Override
+	public String toString()
+	{
+		String t = "<"+getClass().getSimpleName()+">\n"
+				+Constants.TAG_ID+":"+ID+" \n"	
+				+Constants.TAG_NAME+" : "+name+" \n"
+				+Constants.TAG_DESCRIPTION+" : "+description+" \n"
+				+Constants.TAG_POSITION+" : "+position.x+ ","+position.y+" \n"
+				+Constants.TAG_START+" : "+start.ID+" \n"
+				+Constants.TAG_END+" : "+end.ID+" \n"
+				+"</"+getClass().getSimpleName()+">\n"
+				;
+		return t;
+	}
+	
+	public String string()
+	{
+		String t = "<"+getClass().getSimpleName()+">\n"
+				+Constants.TAG_ID+":"+ID+" \n"	
+				+Constants.TAG_NAME+" : "+name+" \n"
+				+Constants.TAG_DESCRIPTION+" : "+description+" \n"
+				+Constants.TAG_POSITION+" : "+position.x+ ","+position.y+" \n"
+				/*+Constants.TAG_START+" : "+start.ID+" \n"
+				+Constants.TAG_END+" : "+end.ID+" \n"*/
+				+"</"+getClass().getSimpleName()+">\n"
+				;
+		return t;
+	}
+	@Override
+	public void onLoadComplete()
+	{
+		// TODO Auto-generated method stub
+		super.onLoadComplete();
+		start = Main.getInstance().getComponent(startID);
+		start.startingTransitions.add(this);
+		
+		end = Main.getInstance().getComponent(endID);
+		end.endingTransitions.add(this);
+				
+		
 	}
 }

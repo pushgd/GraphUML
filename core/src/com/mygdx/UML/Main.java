@@ -8,6 +8,7 @@ import com.mygdx.UML.Application.Canvas;
 import com.mygdx.UML.Application.Menu;
 
 import UI.Button;
+import UI.UMLComponent;
 
 public class Main implements InputProcessor
 {
@@ -142,6 +143,11 @@ public class Main implements InputProcessor
 		menu.onButtonPressed(id);
 		canvas.onButtonPressed(id);
 
+	}
+	
+	public UMLComponent getComponent(int ID)
+	{
+		return canvas.getComponent(ID);
 	}
 
 }

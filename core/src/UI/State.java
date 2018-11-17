@@ -8,10 +8,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class State extends UMLComponent
 {
 
+	public State(int ID)
+	{
+		super(ID);
+//		color = normalColor;
+		setColor();
+	}
+	
 	public State(String name)
 	{
 		super();
-		text = name + ID;
+		this.name = name + ID;
+		setColor();
+	}
+
+	private void setColor()
+	{
 		normalColor = new Color(150 / 255f, 150 / 255f, 150 / 255f, 1);
 		color = normalColor;
 	}
@@ -43,7 +55,7 @@ public class State extends UMLComponent
 		Draw.stateBG.setPosition(position.x - Draw.stateBG.getWidth() / 2, position.y - Draw.stateBG.getHeight() / 2);
 		Draw.stateBG.setColor(color);
 		Draw.stateBG.draw(g);
-		Draw.drawText(g, position.x, position.y, text);
+		Draw.drawText(g, position.x, position.y, name);
 
 	}
 

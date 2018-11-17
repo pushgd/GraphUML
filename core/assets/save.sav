@@ -1,0 +1,76 @@
+<start>
+<Transition>
+ID:10 
+Name : default 
+Description : null 
+Position : 0.0,0.0 
+Start : 8 
+End : 9 
+</Transition>
+<Transition>
+ID:7 
+Name : default 
+Description : null 
+Position : 0.0,0.0 
+Start : 0 
+End : 3 
+</Transition>
+<Transition>
+ID:6 
+Name : default 
+Description : null 
+Position : 0.0,0.0 
+Start : 5 
+End : 3 
+</Transition>
+<Transition>
+ID:2 
+Name :  default  
+Description :  null  
+Position : 0.0,0.0 
+Start : 0 
+End : 1 
+</Transition>
+<State>
+ID:0 
+Name :  New0  
+Description :  null  
+Position : 327.0,389.0 
+</State>
+<State>
+ID:1 
+Name :  New1  
+Description :  null  
+Position : 340.0,524.0 
+</State>
+<State>
+ID:3 
+Name :  New3  
+Description :  null  
+Position : 155.0,285.0 
+</State>
+<State>
+ID:4 
+Name : New4 
+Description : null 
+Position : 721.99994,423.0 
+</State>
+<State>
+ID:5 
+Name : New5 
+Description : null 
+Position : 450.0,164.0 
+</State>
+<State>
+ID:8 
+Name : New8 
+Description : null 
+Position : 526.0,398.00003 
+</State>
+<State>
+ID:9 
+Name : New9 
+Description : null 
+Position : 592.0,249.0 
+</State>
+<end>

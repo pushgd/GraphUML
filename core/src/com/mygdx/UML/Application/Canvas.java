@@ -31,6 +31,7 @@ public class Canvas
 	public static final int STATE_ADD_TRANSITION = 1;
 
 	private ArrayList<UMLComponent> umlComponents = new ArrayList<UMLComponent>();
+	private ArrayList<State> states = new ArrayList<State>();
 
 	private UMLComponent selected;
 
@@ -44,6 +45,7 @@ public class Canvas
 
 	public Canvas()
 	{
+//		umlComponents.add(UMLComponent.createFromString("ID:0 \n Name : From String \n Description : null \n Position : 556.0,550.0 "));
 	}
 
 	public void update()
@@ -55,6 +57,10 @@ public class Canvas
 			if(u.toBeDeleted())
 			{
 				umlComponents.remove(u);
+				if(u instanceof State)
+				{
+					states.remove(u);
+				}
 				i--;
 			}
 		}
@@ -206,6 +212,14 @@ public class Canvas
 				selected.delete();
 				selected= null;
 				break;
+				
+			case Constants.BUTTON_SAVE:
+				save();
+				break;
+				
+			case Constants.BUTTON_LOAD:
+				load();
+				break;
 
 			default:
 				break;
@@ -215,10 +229,47 @@ public class Canvas
 	public void addState(State s)
 	{
 		umlComponents.add(s);
+		states.add(s);
 	}
 
 	public void addTransition(Transition t)
 	{
 		umlComponents.add(t);
 	}
+	
+	public void save()
+	{
+		FileReaderWriter.saveFile(umlComponents);
+	}
+	
+	public void load()
+	{
+		umlComponents.removeAll(umlComponents);
+	ArrayList<String> components = FileReaderWriter.load();
+	for(int i =0;i<components.size();i++)
+	{
+		umlComponents.add(UMLComponent.createFromString(components.get(i)));
+	}
+		
+	for(UMLComponent u : umlComponents)
+	{
+		u.onLoadComplete();
+	}
+	}
+	
+	public UMLComponent getComponent(int ID)
+	{
+		
+		
+		for(UMLComponent u :umlComponents)
+		{
+			if(u.getID()== ID)
+			{
+				return u;
+			}
+		}
+		
+		return null;
+	}
+	
 }

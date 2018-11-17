@@ -10,7 +10,7 @@ public class UIComponent
 	private boolean delete;
 
 	protected int ID;
-	protected String text;
+	protected String name;
 	protected String description;
 	
 	protected Vector2 position;
@@ -59,14 +59,14 @@ public class UIComponent
 
 	}
 
-	public String getText()
+	public String getName()
 	{
-		return text;
+		return name;
 	}
 
-	public void setText(String text)
+	public void setName(String text)
 	{
-		this.text = text;
+		this.name = text;
 	}
 
 	public int getID()
@@ -147,7 +147,7 @@ public class UIComponent
 	public String toString()
 	{
 		// TODO Auto-generated method stub
-		return text + " " + ID;
+		return name + " " + ID;
 	}
 
 	public void paint(SpriteBatch g)
@@ -228,6 +228,10 @@ public class UIComponent
 	{
 		this.description = description;
 	}
-
-
+	
+	public void onLoadComplete()
+	{
+		
+	}
+	
 }

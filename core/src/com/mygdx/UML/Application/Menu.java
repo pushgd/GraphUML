@@ -20,24 +20,48 @@ public class Menu
 
 	public Menu()
 	{
-		Button addStateButton = new Button(VIEWPORT_WIDTH / 2,3* VIEWPORT_HEIGHT / 4);
-		addStateButton.setText("Add New State");
+		int numberOfButton = 6;
+		int x =numberOfButton ;
+		Button addStateButton = new Button(VIEWPORT_WIDTH / 2,x* VIEWPORT_HEIGHT / (numberOfButton+1));
+		addStateButton.setName("Add New State");
 		addStateButton.setID(Constants.BUTTON_ADD_STATE);
 		addStateButton.setListener(ButtonEventsManager.getInstance());
 		buttons.add(addStateButton);
+		x--;
 
-		Button addTransitionButton = new Button(VIEWPORT_WIDTH / 2,2* VIEWPORT_HEIGHT / 4);
-		addTransitionButton.setText("Add New Transion");
+		Button addTransitionButton = new Button(VIEWPORT_WIDTH / 2,x* VIEWPORT_HEIGHT / (numberOfButton+1));
+		addTransitionButton.setName("Add New Transion");
 		addTransitionButton.setID(Constants.BUTTON_ADD_TRANSITION);
 		addTransitionButton.setListener(ButtonEventsManager.getInstance());
 		buttons.add(addTransitionButton);
-
-		Button delete = new Button(VIEWPORT_WIDTH / 2, VIEWPORT_HEIGHT / 4);
-		delete.setText("Delete");
+		x--;
+		Button delete = new Button(VIEWPORT_WIDTH / 2,x* VIEWPORT_HEIGHT / (numberOfButton+1));
+		delete.setName("Delete");
 		delete.setID(Constants.BUTTON_DELETE);
 		delete.setListener(ButtonEventsManager.getInstance());
 		buttons.add(delete);
-
+		x--;
+		Button travel = new Button(VIEWPORT_WIDTH / 2,x* VIEWPORT_HEIGHT / (numberOfButton+1));
+		travel.setName("travel");
+		travel.setID(Constants.BUTTON_TRAVEL);
+		travel.setListener(ButtonEventsManager.getInstance());
+		buttons.add(travel);
+		x--;
+		Button save = new Button(VIEWPORT_WIDTH / 2,x* VIEWPORT_HEIGHT / (numberOfButton+1));
+		save.setName("Save");
+		save.setID(Constants.BUTTON_SAVE);
+		save.setListener(ButtonEventsManager.getInstance());
+		buttons.add(save);
+		x--;
+		
+		
+		Button load = new Button(VIEWPORT_WIDTH / 2,x* VIEWPORT_HEIGHT / (numberOfButton+1));
+		load.setName("Load");
+		load.setID(Constants.BUTTON_LOAD);
+		load.setListener(ButtonEventsManager.getInstance());
+		buttons.add(load);
+		x--;
+		
 		
 		
 		
